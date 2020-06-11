@@ -29,49 +29,46 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test Properties Toggle
  */
 public class PropertiesFeatureToggleVersionTest {
 
-  @Test
-  public void testNullPropertiesPassed() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      new PropertiesFeatureToggleVersion(null);
-    });
-  }
+    @Test
+    public void testNullPropertiesPassed() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new PropertiesFeatureToggleVersion(null);
+        });
+    }
 
-  @Test
-  public void testNonBooleanProperty() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      final Properties properties = new Properties();
-      properties.setProperty("enhancedWelcome", "Something");
-      new PropertiesFeatureToggleVersion(properties);
-    });
-  }
+    @Test
+    public void testNonBooleanProperty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            final Properties properties = new Properties();
+            properties.setProperty("enhancedWelcome", "Something");
+            new PropertiesFeatureToggleVersion(properties);
+        });
+    }
 
-  @Test
-  public void testFeatureTurnedOn() {
-    final Properties properties = new Properties();
-    properties.put("enhancedWelcome", true);
-    Service service = new PropertiesFeatureToggleVersion(properties);
-    assertTrue(service.isEnhanced());
-    final String welcomeMessage = service.getWelcomeMessage(new User("Jamie No Code"));
-    assertEquals("Welcome Jamie No Code. You're using the enhanced welcome message.", welcomeMessage);
-  }
+    @Test
+    public void testFeatureTurnedOn() {
+        final Properties properties = new Properties();
+        properties.put("enhancedWelcome", true);
+        Service service = new PropertiesFeatureToggleVersion(properties);
+        assertTrue(service.isEnhanced());
+        final String welcomeMessage = service.getWelcomeMessage(new User("Jamie No Code"));
+        assertEquals("Welcome Jamie No Code. You're using the enhanced welcome message.", welcomeMessage);
+    }
 
-  @Test
-  public void testFeatureTurnedOff() {
-    final Properties properties = new Properties();
-    properties.put("enhancedWelcome", false);
-    Service service = new PropertiesFeatureToggleVersion(properties);
-    assertFalse(service.isEnhanced());
-    final String welcomeMessage = service.getWelcomeMessage(new User("Jamie No Code"));
-    assertEquals("Welcome to the application.", welcomeMessage);
-  }
+    @Test
+    public void testFeatureTurnedOff() {
+        final Properties properties = new Properties();
+        properties.put("enhancedWelcome", false);
+        Service service = new PropertiesFeatureToggleVersion(properties);
+        assertFalse(service.isEnhanced());
+        final String welcomeMessage = service.getWelcomeMessage(new User("Jamie No Code"));
+        assertEquals("Welcome to the application.", welcomeMessage);
+    }
 }

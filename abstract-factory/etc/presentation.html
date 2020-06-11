@@ -24,34 +24,40 @@
 -->
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Design Patterns - Abstract Factory Presentation</title>
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+        @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+        @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+        @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
-      body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
-      }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-	  
-	  blockquote {
-		border-left: 0.3em solid rgba(0,0,0,0.5);
-		padding: 0 15px;
-		font-style: italic;
-	  }
-	  
-	  img {
-		max-width:100%;
-	  }
+        body {
+            font-family: 'Droid Serif';
+        }
+
+        h1, h2, h3 {
+            font-family: 'Yanone Kaffeesatz';
+            font-weight: normal;
+        }
+
+        .remark-code, .remark-inline-code {
+            font-family: 'Ubuntu Mono';
+        }
+
+        blockquote {
+            border-left: 0.3em solid rgba(0, 0, 0, 0.5);
+            padding: 0 15px;
+            font-style: italic;
+        }
+
+        img {
+            max-width: 100%;
+        }
     </style>
-  </head>
-  <body>
-    <textarea id="source">
+</head>
+<body>
+<textarea id="source">
 
 class: center, middle
 
@@ -76,11 +82,11 @@ class: center, middle
 * [Wikipedia](https://en.wikipedia.org/wiki/Abstract_factory_pattern) says:
   > "The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes"
 
-<br />
+<br/>
 
 * In plain words:
   * A factory that groups individual but related/dependent factories together without specifying their concrete classes;
-  * A factory of factories; 
+  * A factory of factories;
 
 ---
 
@@ -89,11 +95,11 @@ class: center, middle
 * In a factory that creates kingdoms, we need objects with common theme:
 
   * Elven kingdom needs an Elven king, Elven castle and Elven army;
-  
+
   * Orcish kingdom needs an Orcish king, Orcish castle and Orcish army;
 
-<br />
-  
+<br/>
+
 * There is a dependency between the objects in the kingdom;
 
 ---
@@ -114,7 +120,7 @@ class: center, middle
 * At runtime, we can define which Kingdom type is needed and pass it as a parameter to define which concrete KingdomFactory to instantiate;
 
 * The concrete factory returned will then be able to produce the related objects of the specified type;
-  
+
 .center[![Diagram](diagram2.png)]
 
 ---
@@ -181,10 +187,10 @@ Use the Abstract Factory pattern when:
 * Source code http://java-design-patterns.com/patterns/abstract-factory/
 
     </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
-    </script>
-    <script>
-      var slideshow = remark.create();
-    </script>
-  </body>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+    var slideshow = remark.create();
+</script>
+</body>
 </html>

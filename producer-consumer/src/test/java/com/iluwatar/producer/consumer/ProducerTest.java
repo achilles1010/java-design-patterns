@@ -1,17 +1,17 @@
 /**
  * The MIT License
  * Copyright (c) 2014-2016 Ilkka Seppälä
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,9 +27,7 @@ import org.junit.jupiter.api.Test;
 import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.*;
 
 /**
  * Date: 12/28/15 - 12:12 AM
@@ -38,17 +36,17 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
  */
 public class ProducerTest {
 
-  @Test
-  public void testProduce() {
-    assertTimeout(ofMillis(6000), () -> {
-      final ItemQueue queue = mock(ItemQueue.class);
-      final Producer producer = new Producer("producer", queue);
+    @Test
+    public void testProduce() {
+        assertTimeout(ofMillis(6000), () -> {
+            final ItemQueue queue = mock(ItemQueue.class);
+            final Producer producer = new Producer("producer", queue);
 
-      producer.produce();
-      verify(queue).put(any(Item.class));
+            producer.produce();
+            verify(queue).put(any(Item.class));
 
-      verifyNoMoreInteractions(queue);
-    });
-  }
+            verifyNoMoreInteractions(queue);
+        });
+    }
 
 }

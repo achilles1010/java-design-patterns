@@ -23,8 +23,6 @@
 package com.iluwatar.pageobject;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.iluwatar.pageobject.AlbumListPage;
-import com.iluwatar.pageobject.AlbumPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,18 +33,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class AlbumListPageTest {
 
-  private AlbumListPage albumListPage = new AlbumListPage(new WebClient());
+    private AlbumListPage albumListPage = new AlbumListPage(new WebClient());
 
-  @BeforeEach
-  public void setUp() {
-    albumListPage.navigateToPage();
-  }
+    @BeforeEach
+    public void setUp() {
+        albumListPage.navigateToPage();
+    }
 
-  @Test
-  public void testSelectAlbum() {
-    AlbumPage albumPage = albumListPage.selectAlbum("21");
-    albumPage.navigateToPage();
-    assertTrue(albumPage.isAt());
-  }
+    @Test
+    public void testSelectAlbum() {
+        AlbumPage albumPage = albumListPage.selectAlbum("21");
+        albumPage.navigateToPage();
+        assertTrue(albumPage.isAt());
+    }
 
 }

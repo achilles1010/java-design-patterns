@@ -27,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -35,11 +35,19 @@
 </header>
 
 <section>
-    <form method="post" action="album-list.html">
+    <form action="album-list.html" method="post">
         <table>
-            <tr><td>Username:</td><td><input type="text" id="username"></td></tr>
-            <tr><td>Password:</td><td><input type="password" id="password"></td></tr>
-            <tr><td><input type="submit" id="loginButton" value="Login"></td></tr>
+            <tr>
+                <td>Username:</td>
+                <td><input id="username" type="text"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input id="password" type="password"></td>
+            </tr>
+            <tr>
+                <td><input id="loginButton" type="submit" value="Login"></td>
+            </tr>
         </table>
 
     </form>

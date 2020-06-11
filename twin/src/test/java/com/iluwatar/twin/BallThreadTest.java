@@ -1,17 +1,17 @@
 /**
  * The MIT License
  * Copyright (c) 2014-2016 Ilkka Seppälä
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,11 +30,7 @@ import static java.time.Duration.ofMillis;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.*;
 
 /**
  * Date: 12/30/15 - 18:55 PM
@@ -43,77 +39,77 @@ import static org.mockito.Mockito.verifyZeroInteractions;
  */
 public class BallThreadTest {
 
-  /**
-   * Verify if the {@link BallThread} can be resumed
-   */
-  @Test
-  public void testSuspend() throws Exception {
-    assertTimeout(ofMillis(5000), () -> {
-      final BallThread ballThread = new BallThread();
+    /**
+     * Verify if the {@link BallThread} can be resumed
+     */
+    @Test
+    public void testSuspend() throws Exception {
+        assertTimeout(ofMillis(5000), () -> {
+            final BallThread ballThread = new BallThread();
 
-      final BallItem ballItem = mock(BallItem.class);
-      ballThread.setTwin(ballItem);
+            final BallItem ballItem = mock(BallItem.class);
+            ballThread.setTwin(ballItem);
 
-      ballThread.start();
+            ballThread.start();
 
-      verify(ballItem, timeout(2000).atLeastOnce()).draw();
-      verify(ballItem, timeout(2000).atLeastOnce()).move();
-      ballThread.suspendMe();
+            verify(ballItem, timeout(2000).atLeastOnce()).draw();
+            verify(ballItem, timeout(2000).atLeastOnce()).move();
+            ballThread.suspendMe();
 
-      sleep(1000);
+            sleep(1000);
 
-      ballThread.stopMe();
-      ballThread.join();
+            ballThread.stopMe();
+            ballThread.join();
 
-      verifyNoMoreInteractions(ballItem);
-    });
-  }
+            verifyNoMoreInteractions(ballItem);
+        });
+    }
 
-  /**
-   * Verify if the {@link BallThread} can be resumed
-   */
-  @Test
-  public void testResume() {
-    assertTimeout(ofMillis(5000), () -> {
-      final BallThread ballThread = new BallThread();
+    /**
+     * Verify if the {@link BallThread} can be resumed
+     */
+    @Test
+    public void testResume() {
+        assertTimeout(ofMillis(5000), () -> {
+            final BallThread ballThread = new BallThread();
 
-      final BallItem ballItem = mock(BallItem.class);
-      ballThread.setTwin(ballItem);
+            final BallItem ballItem = mock(BallItem.class);
+            ballThread.setTwin(ballItem);
 
-      ballThread.suspendMe();
-      ballThread.start();
+            ballThread.suspendMe();
+            ballThread.start();
 
-      sleep(1000);
+            sleep(1000);
 
-      verifyZeroInteractions(ballItem);
+            verifyZeroInteractions(ballItem);
 
-      ballThread.resumeMe();
-      verify(ballItem, timeout(2000).atLeastOnce()).draw();
-      verify(ballItem, timeout(2000).atLeastOnce()).move();
+            ballThread.resumeMe();
+            verify(ballItem, timeout(2000).atLeastOnce()).draw();
+            verify(ballItem, timeout(2000).atLeastOnce()).move();
 
-      ballThread.stopMe();
-      ballThread.join();
+            ballThread.stopMe();
+            ballThread.join();
 
-      verifyNoMoreInteractions(ballItem);
-    });
-  }
+            verifyNoMoreInteractions(ballItem);
+        });
+    }
 
-  /**
-   * Verify if the {@link BallThread} is interruptible
-   */
-  @Test
-  public void testInterrupt() {
-    assertTimeout(ofMillis(5000), () -> {
-      final BallThread ballThread = new BallThread();
-      final UncaughtExceptionHandler exceptionHandler = mock(UncaughtExceptionHandler.class);
-      ballThread.setUncaughtExceptionHandler(exceptionHandler);
-      ballThread.setTwin(mock(BallItem.class));
-      ballThread.start();
-      ballThread.interrupt();
-      ballThread.join();
+    /**
+     * Verify if the {@link BallThread} is interruptible
+     */
+    @Test
+    public void testInterrupt() {
+        assertTimeout(ofMillis(5000), () -> {
+            final BallThread ballThread = new BallThread();
+            final UncaughtExceptionHandler exceptionHandler = mock(UncaughtExceptionHandler.class);
+            ballThread.setUncaughtExceptionHandler(exceptionHandler);
+            ballThread.setTwin(mock(BallItem.class));
+            ballThread.start();
+            ballThread.interrupt();
+            ballThread.join();
 
-      verify(exceptionHandler).uncaughtException(eq(ballThread), any(RuntimeException.class));
-      verifyNoMoreInteractions(exceptionHandler);
-    });
-  }
+            verify(exceptionHandler).uncaughtException(eq(ballThread), any(RuntimeException.class));
+            verifyNoMoreInteractions(exceptionHandler);
+        });
+    }
 }
